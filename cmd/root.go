@@ -8,7 +8,6 @@ import (
 	"os"
 )
 
-
 func NewRootCmd() *cobra.Command {
 	result := &cobra.Command{
 		Use:   "vault2k8s",
@@ -35,7 +34,11 @@ func NewRootCmd() *cobra.Command {
 				os.Exit(1)
 
 			}
-			secretMap := getVaultDate(viper.GetString("vaultPath"))
+			client, err := createVaultClient()
+			if err != nil {
+				panic(err)
+			}
+			secretMap := getVaultData(viper.GetString("vaultPath"), client)
 			if secretMap == nil {
 				logrus.Errorf("No data recieved from vault")
 			}

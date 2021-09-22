@@ -21,7 +21,7 @@ func convertPath(vaultPath string) (string, error) {
 	return fixPath, nil
 }
 
-func getVaultDate(vaultPath string) map[string]interface{} {
+func createVaultClient() (*api.Client, error) {
 	client, err := api.NewClient(nil)
 	// Get the token if it came in from the environment
 	vaultToken := client.Token()
@@ -31,19 +31,25 @@ func getVaultDate(vaultPath string) map[string]interface{} {
 		helper, err := token.NewInternalTokenHelper()
 		if err != nil {
 			logrus.Errorf("failed to get token helper, error : %s", err)
-			return nil
+			return nil, err
 		}
 		vaultToken, err = helper.Get()
 		if err != nil {
 			logrus.Errorf("failed to get token from token helper : %s", err)
-			return nil
+			return nil, err
 		}
 	}
 	client.SetToken(vaultToken)
 	if err != nil {
-		logrus.Errorf("failed to parse verbosity: %s", err)
+		logrus.Errorf("failed to set token: %s", err)
+		return nil, err
 	}
-	vaultPath, err = convertPath(vaultPath)
+	return client, nil
+}
+
+func getVaultData(vaultPath string, client *api.Client) map[string]interface{} {
+
+	vaultPath, err := convertPath(vaultPath)
 	if err != nil {
 		logrus.Errorf("failed to get vaultPath: %s", err)
 		return nil

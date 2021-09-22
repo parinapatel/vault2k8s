@@ -1,7 +1,7 @@
 LDFLAGS := -s -w
 
 .PHONY: all
-all: build
+all: fmt build test
 
 bin:
 	mkdir -p bin/
@@ -18,6 +18,14 @@ clean:
 	rm -rf bin/
 	go clean
 
+.PHONY: test
+test:
+	go test -v ./...
+
 .PHONY: lint
 lint:
 	golangci-lint run ./...
+
+.PHONY: fmt
+fmt:
+	go fmt ./...
