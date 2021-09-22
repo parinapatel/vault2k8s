@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"vault2k8s/cmd"
 
@@ -16,7 +15,7 @@ func main() {
 	})
 
 	if err := cmd.NewRootCmd().Execute(); err != nil {
-		fmt.Errorf("error : %w", err)
+		logrus.Errorf("error : %s", err)
 		os.Exit(1)
 	}
 }

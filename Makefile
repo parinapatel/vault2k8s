@@ -17,3 +17,7 @@ build: bin
 clean:
 	rm -rf bin/
 	go clean
+
+.PHONY: lint
+lint:
+	golangci-lint run ./...

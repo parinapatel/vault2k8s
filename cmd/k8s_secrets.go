@@ -61,7 +61,7 @@ func convertK8sSecret(data map[string]interface{}, secretName string, namespace 
 		if err != nil {
 			if forceDecode {
 				logrus.Errorf("Unable to decode secret %s with key %s , are they base64 encoded ?", secretName, k)
-				return nil, fmt.Errorf("Unable to decode secret %s with key %s , are they base64 encoded?!", secretName, k)
+				return nil, fmt.Errorf("unable to decode secret %s with key %s , are they base64 encoded", secretName, k)
 			}
 			v = base64.StdEncoding.EncodeToString([]byte(v.(string)))
 		}
