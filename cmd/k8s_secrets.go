@@ -48,6 +48,17 @@ func checkCert(data map[string]string) bool {
 			return false
 		}
 	}
+	c := certs{}
+	c.cert, _ = base64.StdEncoding.DecodeString(data["tls.crt"])
+	c.key, _ = base64.StdEncoding.DecodeString(data["tls.key"])
+	if contains(keys, "ca.crt") {
+		c.caCert, _ = base64.StdEncoding.DecodeString(data["ca.crt"])
+	}
+	_, err := verifyCerts(c)
+	if err != nil {
+		logrus.Fatal(err)
+		return false
+	}
 	return true
 }
 
