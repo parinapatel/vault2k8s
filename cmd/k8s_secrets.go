@@ -39,7 +39,7 @@ func checkCert(data map[string]string) bool {
 
 	requiredKeys := []string{"tls.key", "tls.crt"}
 
-	if len(keys) > len(requiredKeys) {
+	if len(keys) < len(requiredKeys) {
 		return false
 	}
 	for _, e := range keys {

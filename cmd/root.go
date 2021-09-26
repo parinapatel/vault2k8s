@@ -32,7 +32,6 @@ func NewRootCmd() *cobra.Command {
 			if viper.GetString("secretName") == "" {
 				logrus.Errorf("Missing flags secretName")
 				os.Exit(1)
-
 			}
 			client, err := createVaultClient()
 			if err != nil {

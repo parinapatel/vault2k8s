@@ -1,10 +1,11 @@
 # vault2k8s
 
-This is small project that given vault path converts to k8s secrets, It also converts keys like `certs` , `keys` to required 'tls.key' & `tls.crt` format.
+This is small project that given vault path converts to k8s secrets, It also converts keys like `certs` , `keys` to
+required 'tls.key' & `tls.crt` format.
 
 Note : It expected that you have `VAULT_ADDR` & vault login done.
 
-# Usage 
+# Usage
 
 ```bash
 ppatel4@ppatel4-mbp:[Wed Sep 22 00:53:37]:~/Documents/repos/vault2k8s:[master !+]$ bin/OSX/vault2k8s -h
