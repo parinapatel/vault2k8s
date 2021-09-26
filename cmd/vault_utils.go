@@ -2,10 +2,11 @@ package cmd
 
 import (
 	"errors"
+	"strings"
+
 	"github.com/hashicorp/vault/api"
 	"github.com/hashicorp/vault/command/token"
 	"github.com/sirupsen/logrus"
-	"strings"
 )
 
 func convertPath(vaultPath string) (string, error) {
